@@ -13,7 +13,6 @@ class PelaajaTest {
 
     @BeforeEach
     void setUp() {
-        System.out.println("luo pelaaja uudestaan");
         pelaaja = new Pelaaja();
     }
 
@@ -73,5 +72,12 @@ class PelaajaTest {
         if (voitot == 1) {
             assert (!pelaaja.tulostaVoitot().contains("voittoa"));
         }
+    }
+
+    @Test
+    void oikeaTulostusEriPelaajanumeroilla() {
+        Pelaaja pelaaja2 = new Pelaaja();
+        assert (pelaaja.tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
+        assert (pelaaja2.tulostaVoitot().toLowerCase().contains("pelaaja 2:lla"));
     }
 }
