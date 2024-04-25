@@ -9,11 +9,22 @@ public class Peli {
     private int pelatutPelit, tasapelit;
 
     public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
+        validoiPelaajat(p1, p2);
         this.pelaaja1 = p1;
         this.pelaaja2 = p2;
         this.maxVoitot = maxVoitot;
         this.pelatutPelit = 0;
         this.tasapelit = 0;
+    }
+
+    private void validoiPelaajat(Pelaaja p1, Pelaaja p2) {
+        if (p1 == null || p2 == null) {
+            throw new IllegalArgumentException("Pelaaja puuttuu");
+        }
+
+        if (p1 == p2) {
+            throw new IllegalArgumentException("Pelaaja 1 ja pelaaja 2 eivät voi olla samat");
+        }
     }
 
     public boolean pelaa() {

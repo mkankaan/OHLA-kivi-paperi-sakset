@@ -80,4 +80,11 @@ class PelaajaTest {
         assert (new Pelaaja().tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
         assert (new Pelaaja().tulostaVoitot().toLowerCase().contains("pelaaja 2:lla"));
     }
+
+    @Test
+    void pelaajiaMax2() {
+        for (int i = 0; i < 3; i++) {
+            Pelaaja pelaaja = new Pelaaja();
+        }
+    }
 }
