@@ -9,11 +9,13 @@ public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
     private TulostettavaNumero maxVoitot;
     private int pelatutPelit, tasapelit;
+    private TulostettavaNumero oletusMaxVoitot;
 
     Peli() {
         this.pelaaja1 = new Pelaaja();
         this.pelaaja2 = new Pelaaja();
-        this.maxVoitot = new TulostettavaNumero(1, "yksi");
+        this.oletusMaxVoitot = new TulostettavaNumero(1, "yksi");
+        this.maxVoitot = oletusMaxVoitot;
         this.pelatutPelit = 0;
         this.tasapelit = 0;
     }
@@ -29,7 +31,28 @@ public class Peli {
     }
 
     public void setMaxVoitot(TulostettavaNumero maxVoitot) {
+        if (maxVoitot == null) {
+            this.maxVoitot = oletusMaxVoitot;
+            return;
+        }
+
+        if (maxVoitot.getLukumaara() < 1) {
+            throw new IllegalArgumentException("Voittojen maksimimäärän oltava vähintään 1");
+        }
+
         this.maxVoitot = maxVoitot;
+    }
+
+    public Pelaaja getPelaaja1() {
+        return pelaaja1;
+    }
+
+    public Pelaaja getPelaaja2() {
+        return pelaaja2;
+    }
+
+    public int getMaxVoitot() {
+        return this.maxVoitot.getLukumaara();
     }
 
     private Pelaaja validoiPelaaja(Pelaaja pelaaja) {
