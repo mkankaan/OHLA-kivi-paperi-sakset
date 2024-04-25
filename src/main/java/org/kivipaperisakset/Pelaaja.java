@@ -14,10 +14,10 @@ public class Pelaaja {
 
     public Pelaaja() {
         this.pelaajaNumero = juoksevaNumero++;
-    }
 
-    public Pelaaja(int numero) {
-        this.pelaajaNumero = numero;
+        if (juoksevaNumero > 2) {
+            resetoiPelaajaNumero();
+        }
     }
 
     public int getVoitot() {
@@ -33,7 +33,6 @@ public class Pelaaja {
         return vaihtoehdot[arvoSatunnaisluku(vaihtoehdot.length)];
     }
 
-    // yläraja mukana vai ei?
     private int arvoSatunnaisluku(int ylaraja) {
         return (int) (Math.random() * ylaraja);
     }
@@ -48,5 +47,9 @@ public class Pelaaja {
 
     public String toString() {
         return "Pelaaja " + pelaajaNumero;
+    }
+
+    public void resetoiPelaajaNumero() {
+        this.juoksevaNumero = 1;
     }
 }
