@@ -6,9 +6,9 @@ import org.kivipaperisakset.valinta.Valinta;
 public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
     private int pelatutPelit, tasapelit;
-    private MaxVoitot maxVoitot;
+    private TulostettavaNumero maxVoitot;
 
-    public Peli(Pelaaja p1, Pelaaja p2, MaxVoitot maxVoitot) {
+    public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
         this.pelaaja1 = p1;
         this.pelaaja2 = p2;
         this.maxVoitot = maxVoitot;

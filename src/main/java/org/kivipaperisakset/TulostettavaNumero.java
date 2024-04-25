@@ -1,11 +1,11 @@
 package org.kivipaperisakset;
 
-public class MaxVoitot {
+public class TulostettavaNumero {
     private int maara;
     private String teksti;
 
-    public MaxVoitot(int maara, String teksti) {
-        this.maara = maara;
+    public TulostettavaNumero(int numero, String teksti) {
+        this.maara = numero;
         this.teksti = teksti;
     }
 
