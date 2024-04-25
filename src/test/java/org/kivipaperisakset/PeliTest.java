@@ -41,7 +41,7 @@ class PeliTest {
     }
 
     @Test
-    void samaPelaaja() {
+    void eiKahtaSamaaPelaajaa() {
         Pelaaja multitaskaaja = new Pelaaja();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -54,6 +54,33 @@ class PeliTest {
 
     @Test
     void tasapeli() {
+        boolean tasapeli = false;
 
+        while (!tasapeli) {
+            Pelaaja pelaaja1 = new Pelaaja();
+            Pelaaja pelaaja2 = new Pelaaja();
+            Peli peli = new Peli(pelaaja1, pelaaja2, new TulostettavaNumero(3, "kolme"));
+            peli.pelaa();
+
+            if (peli.getTasapelit() > 0) {
+                tasapeli = true;
+                assert(pelaaja1.getVoitot() < peli.getPelatutPelit());
+                assert(pelaaja2.getVoitot() < peli.getPelatutPelit());
+                assertEquals((pelaaja1.getVoitot() + pelaaja2.getVoitot() + peli.getTasapelit()), peli.getPelatutPelit());
+            }
+        }
+    }
+
+    @Test
+    void eiYlitaMaksimivoittoja() {
+        Pelaaja pelaaja1 = new Pelaaja();
+
+        for (int i = 0; i < 6; i++) {
+            pelaaja1.lisaaVoitto();
+        }
+
+        Peli peli = new Peli(pelaaja1, new Pelaaja(), new TulostettavaNumero(5, "viisi"));
+        peli.pelaa();
+        assertEquals(peli.getPelatutPelit(), 0);
     }
 }

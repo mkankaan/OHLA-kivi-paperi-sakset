@@ -47,7 +47,7 @@ public class Peli {
     }
 
     public boolean pelaa() {
-        do {
+        while (!peliLoppui()) {
             tulostaEra();
             tulostaTasapelit();
 
@@ -69,7 +69,7 @@ public class Peli {
 
             pelatutPelit++;
             System.out.println();
-        } while (!peliLoppui());
+        };
 
         tulostaVoitot();
         return true;
@@ -112,6 +112,10 @@ public class Peli {
 
     public int getTasapelit() {
         return tasapelit;
+    }
+
+    public int getPelatutPelit() {
+        return pelatutPelit;
     }
 
     private String tulostaVoitot() {
