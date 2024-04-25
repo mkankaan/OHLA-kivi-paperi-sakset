@@ -76,8 +76,9 @@ class PelaajaTest {
 
     @Test
     void oikeaTulostusEriPelaajanumeroilla() {
-        Pelaaja pelaaja2 = new Pelaaja();
-        assert (pelaaja.tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
+        Pelaaja pelaaja1 = new Pelaaja(1);
+        Pelaaja pelaaja2 = new Pelaaja(2);
+        assert (pelaaja1.tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
         assert (pelaaja2.tulostaVoitot().toLowerCase().contains("pelaaja 2:lla"));
     }
 }

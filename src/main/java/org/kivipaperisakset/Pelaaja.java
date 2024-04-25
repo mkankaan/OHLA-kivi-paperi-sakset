@@ -16,6 +16,10 @@ public class Pelaaja {
         this.pelaajaNumero = juoksevaNumero++;
     }
 
+    public Pelaaja(int numero) {
+        this.pelaajaNumero = numero;
+    }
+
     public int getVoitot() {
         return voitot;
     }
