@@ -10,8 +10,7 @@ import org.kivipaperisakset.valinta.Valinta;
 
 public class Pelaaja {
     private static int juoksevaNumero = 1;
-    private int pelaajaNumero;
-    private int voitot;
+    private int pelaajaNumero, voitot;
 
     public Pelaaja() {
         this.pelaajaNumero = juoksevaNumero++;
@@ -35,10 +34,12 @@ public class Pelaaja {
         return (int) (Math.random() * ylaraja);
     }
 
-    public void tulostaVoitot() {
+    public String tulostaVoitot() {
         String muoto = pelaajaNumero == 1 ? "ä" : "a";
         String monikko = voitot == 1 ? "" : "a";
-        System.out.println("\t " + this + ":ll" + muoto + " koossa " + voitot + " voitto" + monikko + ".");
+        String viesti = "\t " + this + ":ll" + muoto + " koossa " + voitot + " voitto" + monikko + ".";
+        System.out.println(viesti);
+        return viesti;
     }
 
     public String toString() {

@@ -5,8 +5,8 @@ import org.kivipaperisakset.valinta.Valinta;
 
 public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
-    private int pelatutPelit, tasapelit;
     private TulostettavaNumero maxVoitot;
+    private int pelatutPelit, tasapelit;
 
     public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
         this.pelaaja1 = p1;
@@ -46,7 +46,7 @@ public class Peli {
     }
 
     private boolean peliLoppui() {
-        return (pelaaja1.getVoitot() >= maxVoitot.getMaara()) || (pelaaja2.getVoitot() >= maxVoitot.getMaara());
+        return (pelaaja1.getVoitot() >= maxVoitot.getLukumaara()) || (pelaaja2.getVoitot() >= maxVoitot.getLukumaara());
     }
 
     private Valinta pelaaVuoro(Pelaaja pelaaja) {

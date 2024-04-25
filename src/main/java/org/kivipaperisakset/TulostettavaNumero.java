@@ -1,16 +1,16 @@
 package org.kivipaperisakset;
 
 public class TulostettavaNumero {
-    private int maara;
+    private int numero;
     private String teksti;
 
     public TulostettavaNumero(int numero, String teksti) {
-        this.maara = numero;
+        this.numero = numero;
         this.teksti = teksti;
     }
 
-    public int getMaara() {
-        return maara;
+    public int getLukumaara() {
+        return numero;
     }
 
     @Override
