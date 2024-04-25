@@ -15,6 +15,6 @@ public class TulostettavaNumero {
 
     @Override
     public String toString() {
-        return teksti;
+        return (teksti == null) ? String.valueOf(numero) : teksti;
     }
 }

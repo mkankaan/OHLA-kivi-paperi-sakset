@@ -1,7 +1,5 @@
-package org.kivipaperisakset.peli;
+package org.kivipaperisakset;
 
-import org.kivipaperisakset.Pelaaja;
-import org.kivipaperisakset.TulostettavaNumero;
 import org.kivipaperisakset.valinta.Vertailija;
 import org.kivipaperisakset.valinta.Valinta;
 
@@ -9,46 +7,26 @@ public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
     private TulostettavaNumero maxVoitot;
     private int pelatutPelit, tasapelit;
-    private TulostettavaNumero oletusMaxVoitot;
 
-    Peli() {
-        this.pelaaja1 = new Pelaaja();
-        this.pelaaja2 = new Pelaaja();
-        this.oletusMaxVoitot = new TulostettavaNumero(1, "yksi");
-        this.maxVoitot = oletusMaxVoitot;
+    public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
+        this.pelaaja1 = validoiPelaaja(p1);
+        this.pelaaja2 = validoiPelaaja(p2);
+        vertaaPelaajia();
+        this.maxVoitot = validoiMaxVoitot(maxVoitot);
         this.pelatutPelit = 0;
         this.tasapelit = 0;
     }
 
-    public void setPelaaja1(Pelaaja pelaaja) {
-        this.pelaaja1 = validoiPelaaja(pelaaja);
-        vertaaPelaajia();
-    }
-
-    public void setPelaaja2(Pelaaja pelaaja) {
-        this.pelaaja2 = validoiPelaaja(pelaaja);
-        vertaaPelaajia();
-    }
-
-    public void setMaxVoitot(TulostettavaNumero maxVoitot) {
+    public TulostettavaNumero validoiMaxVoitot(TulostettavaNumero maxVoitot) {
         if (maxVoitot == null) {
-            this.maxVoitot = oletusMaxVoitot;
-            return;
+            return new TulostettavaNumero(1, "yksi");
         }
 
         if (maxVoitot.getLukumaara() < 1) {
             throw new IllegalArgumentException("Voittojen maksimimäärän oltava vähintään 1");
         }
 
-        this.maxVoitot = maxVoitot;
-    }
-
-    public Pelaaja getPelaaja1() {
-        return pelaaja1;
-    }
-
-    public Pelaaja getPelaaja2() {
-        return pelaaja2;
+        return maxVoitot;
     }
 
     public int getMaxVoitot() {
@@ -130,6 +108,10 @@ public class Peli {
         String viesti = "Tasapelien lukumäärä: " + tasapelit + "\n";
         System.out.println(viesti);
         return viesti;
+    }
+
+    public int getTasapelit() {
+        return tasapelit;
     }
 
     private String tulostaVoitot() {
