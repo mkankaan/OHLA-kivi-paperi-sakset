@@ -1,5 +1,7 @@
-package org.kivipaperisakset;
+package org.kivipaperisakset.peli;
 
+import org.kivipaperisakset.Pelaaja;
+import org.kivipaperisakset.TulostettavaNumero;
 import org.kivipaperisakset.valinta.Vertailija;
 import org.kivipaperisakset.valinta.Valinta;
 
@@ -8,21 +10,37 @@ public class Peli {
     private TulostettavaNumero maxVoitot;
     private int pelatutPelit, tasapelit;
 
-    public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
-        validoiPelaajat(p1, p2);
-        this.pelaaja1 = p1;
-        this.pelaaja2 = p2;
-        this.maxVoitot = maxVoitot;
+    Peli() {
+        this.pelaaja1 = new Pelaaja();
+        this.pelaaja2 = new Pelaaja();
+        this.maxVoitot = new TulostettavaNumero(1, "yksi");
         this.pelatutPelit = 0;
         this.tasapelit = 0;
     }
 
-    private void validoiPelaajat(Pelaaja p1, Pelaaja p2) {
-        if (p1 == null || p2 == null) {
+    public void setPelaaja1(Pelaaja pelaaja) {
+        this.pelaaja1 = validoiPelaaja(pelaaja);
+        vertaaPelaajia();
+    }
+
+    public void setPelaaja2(Pelaaja pelaaja) {
+        this.pelaaja2 = validoiPelaaja(pelaaja);
+        vertaaPelaajia();
+    }
+
+    public void setMaxVoitot(TulostettavaNumero maxVoitot) {
+        this.maxVoitot = maxVoitot;
+    }
+
+    private Pelaaja validoiPelaaja(Pelaaja pelaaja) {
+        if (pelaaja == null) {
             throw new IllegalArgumentException("Pelaaja puuttuu");
         }
+        return pelaaja;
+    }
 
-        if (p1 == p2) {
+    private void vertaaPelaajia() {
+        if (this.pelaaja1 == this.pelaaja2) {
             throw new IllegalArgumentException("Pelaaja 1 ja pelaaja 2 eivät voi olla samat");
         }
     }
@@ -92,7 +110,8 @@ public class Peli {
     }
 
     private String tulostaVoitot() {
-        String viesti = maxVoitot.toString().toUpperCase() + " VOITTOA - PELI PÄÄTTYY";
+        String monikko = maxVoitot.getLukumaara() == 1 ? "" : "A";
+        String viesti = maxVoitot.toString().toUpperCase() + " VOITTO" + monikko + " - PELI PÄÄTTYY";
         System.out.println(viesti);
         return viesti;
     }
