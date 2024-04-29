@@ -1,14 +1,14 @@
 package org.kivipaperisakset;
 
+import org.kivipaperisakset.utils.NumeroTekstina;
 import org.kivipaperisakset.valinta.Vertailija;
 import org.kivipaperisakset.valinta.Valinta;
 
 public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
-    private TulostettavaNumero maxVoitot;
-    private int pelatutPelit, tasapelit;
+    private int pelatutPelit, tasapelit, maxVoitot;
 
-    public Peli(Pelaaja p1, Pelaaja p2, TulostettavaNumero maxVoitot) {
+    public Peli(Pelaaja p1, Pelaaja p2, int maxVoitot) {
         this.pelaaja1 = validoiPelaaja(p1);
         this.pelaaja2 = validoiPelaaja(p2);
         vertaaPelaajia();
@@ -17,20 +17,11 @@ public class Peli {
         this.tasapelit = 0;
     }
 
-    public TulostettavaNumero validoiMaxVoitot(TulostettavaNumero maxVoitot) {
-        if (maxVoitot == null) {
-            return new TulostettavaNumero(1, "yksi");
-        }
-
-        if (maxVoitot.getLukumaara() < 1) {
+    public int validoiMaxVoitot(int maxVoitot) {
+        if (maxVoitot < 1) {
             throw new IllegalArgumentException("Voittojen maksimimäärän oltava vähintään 1");
         }
-
         return maxVoitot;
-    }
-
-    public int getMaxVoitot() {
-        return this.maxVoitot.getLukumaara();
     }
 
     private Pelaaja validoiPelaaja(Pelaaja pelaaja) {
@@ -46,7 +37,15 @@ public class Peli {
         }
     }
 
-    public boolean pelaa() {
+    public int getTasapelit() {
+        return tasapelit;
+    }
+
+    public int getPelatutPelit() {
+        return pelatutPelit;
+    }
+
+    public String pelaa() {
         while (!peliLoppui()) {
             tulostaEra();
             tulostaTasapelit();
@@ -56,12 +55,10 @@ public class Peli {
 
             Vertailija vertailija = new Vertailija();
             int tulos = vertailija.compare(pelaaja1Valinta, pelaaja2Valinta);
-            boolean pelaaja1Voitti = tulos > 0;
-            boolean pelaaja2Voitti = tulos < 0;
 
-            if (pelaaja1Voitti) {
+            if (tulos > 0) {
                 kasitteleVoitto(pelaaja1);
-            } else if (pelaaja2Voitti) {
+            } else if (tulos < 0) {
                 kasitteleVoitto(pelaaja2);
             } else {
                 kasitteleTasapeli();
@@ -70,13 +67,11 @@ public class Peli {
             pelatutPelit++;
             System.out.println();
         };
-
-        tulostaVoitot();
-        return true;
+        return tulostaVoitot();
     }
 
     private boolean peliLoppui() {
-        return (pelaaja1.getVoitot() >= maxVoitot.getLukumaara()) || (pelaaja2.getVoitot() >= maxVoitot.getLukumaara());
+        return (pelaaja1.getVoitot() >= maxVoitot || (pelaaja2.getVoitot() >= maxVoitot));
     }
 
     private Valinta pelaaVuoro(Pelaaja pelaaja) {
@@ -91,36 +86,23 @@ public class Peli {
         pelaaja.lisaaVoitto();
     }
 
-    private String kasitteleTasapeli() {
-        String viesti = "\n\t\t\t Tasapeli \n";
-        System.out.println(viesti);
+    private void kasitteleTasapeli() {
+        System.out.println("\n\t\t\t Tasapeli \n");
         tasapelit++;
-        return viesti;
     }
 
-    private String tulostaEra() {
-        String viesti = "Erä: " + pelatutPelit + " =====================\n";
-        System.out.println(viesti);
-        return viesti;
+    private void tulostaEra() {
+        System.out.println("Erä: " + pelatutPelit + " =====================\n");
     }
 
-    private String tulostaTasapelit() {
-        String viesti = "Tasapelien lukumäärä: " + tasapelit + "\n";
-        System.out.println(viesti);
-        return viesti;
-    }
-
-    public int getTasapelit() {
-        return tasapelit;
-    }
-
-    public int getPelatutPelit() {
-        return pelatutPelit;
+    private void tulostaTasapelit() {
+        System.out.println("Tasapelien lukumäärä: " + tasapelit + "\n");
     }
 
     private String tulostaVoitot() {
-        String monikko = maxVoitot.getLukumaara() == 1 ? "" : "A";
-        String viesti = maxVoitot.toString().toUpperCase() + " VOITTO" + monikko + " - PELI PÄÄTTYY";
+        NumeroTekstina sanakirja = NumeroTekstina.getInstance();
+        String monikko = maxVoitot == 1 ? "" : "A";
+        String viesti = sanakirja.getTekstina(maxVoitot).toUpperCase() + " VOITTO" + monikko + " - PELI PÄÄTTYY";
         System.out.println(viesti);
         return viesti;
     }

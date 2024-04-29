@@ -14,8 +14,9 @@ public class Pelaaja {
 
     public Pelaaja() {
         this.pelaajaNumero = juoksevaNumero++;
+        final int PELAAJIEN_MAX_LKM = 2;
 
-        if (juoksevaNumero > 2) {
+        if (juoksevaNumero > PELAAJIEN_MAX_LKM) {
             resetoiPelaajaNumero();
         }
     }
