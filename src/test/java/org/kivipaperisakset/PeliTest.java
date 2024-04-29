@@ -1,15 +1,34 @@
 package org.kivipaperisakset;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.kivipaperisakset.peli.Peli;
+import org.kivipaperisakset.peli.PeliBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PeliTest {
+    private PeliBuilder peliBuilder = new PeliBuilder();
+    private Peli peli;
+
+    @BeforeEach
+    void setUp() {
+        peliBuilder.reset();
+    }
+
+    @Test
+    void oletusKonstruktori() {
+        peli = peliBuilder.luo();
+        assertEquals(peli.getPelaaja1().toString().toLowerCase(), "pelaaja 1");
+        assertEquals(peli.getPelaaja2().toString().toLowerCase(), "pelaaja 2");
+        assertEquals(peli.getMaxVoitot(), 1);
+    }
+
     @Test
     void pelaaja1Puuttuu() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Peli(null, new Pelaaja(), 1);
+            peliBuilder.pelaaja1(null);
         });
 
         String expectedMessage = "Pelaaja puuttuu";
@@ -19,7 +38,7 @@ class PeliTest {
     @Test
     void pelaaja2Puuttuu() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Peli(new Pelaaja(), null, 9);
+            peliBuilder.pelaaja2(null);
         });
 
         String expectedMessage = "Pelaaja puuttuu";
@@ -32,7 +51,7 @@ class PeliTest {
     })
     void maxVoitotNollaTaiAlle(int maxVoitot) {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Peli(new Pelaaja(), new Pelaaja(), maxVoitot);
+            peliBuilder.maxVoitot(maxVoitot);
         });
 
         String expectedMessage = "voittojen maksimimäärän oltava vähintään 1";
@@ -44,7 +63,7 @@ class PeliTest {
         Pelaaja multitaskaaja = new Pelaaja();
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new Peli(multitaskaaja, multitaskaaja, 3);
+            peliBuilder.pelaaja1(multitaskaaja).pelaaja2(multitaskaaja);
         });
 
         String expectedMessage = "pelaaja 1 ja pelaaja 2 eivät voi olla samat";
@@ -58,7 +77,7 @@ class PeliTest {
         while (!tasapeli) {
             Pelaaja pelaaja1 = new Pelaaja();
             Pelaaja pelaaja2 = new Pelaaja();
-            Peli peli = new Peli(pelaaja1, pelaaja2, 4);
+            peli = peliBuilder.pelaaja1(pelaaja1).pelaaja2(pelaaja2).maxVoitot(4).luo();
             peli.pelaa();
 
             if (peli.getTasapelit() > 0) {
@@ -78,7 +97,7 @@ class PeliTest {
             pelaaja1.lisaaVoitto();
         }
 
-        Peli peli = new Peli(pelaaja1, new Pelaaja(), 5);
+        peli = peliBuilder.pelaaja1(pelaaja1).maxVoitot(5).luo();
         peli.pelaa();
         assertEquals(peli.getPelatutPelit(), 0);
     }
@@ -88,7 +107,7 @@ class PeliTest {
             "1, voitto", "2, voittoa", "11, voittoa"
     })
     void voittojenTulostusOikeassaMuodossa(int maxVoitot, String monikko) {
-        Peli peli = new Peli(new Pelaaja(), new Pelaaja(), maxVoitot);
+        peli = peliBuilder.maxVoitot(maxVoitot).luo();
         String tulos = peli.pelaa();
         String testattavaSana = tulos.split("-")[0].split(" ")[1].trim();
         assertEquals(testattavaSana.toLowerCase(), monikko.toLowerCase(), "Voittojen määrän tulostus väärässä muodossa");

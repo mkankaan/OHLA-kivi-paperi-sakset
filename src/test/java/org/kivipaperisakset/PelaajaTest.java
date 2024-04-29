@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.kivipaperisakset.valinta.Valinta;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.kivipaperisakset.Pelaaja.resetoiPelaajaNumero;
 import static org.kivipaperisakset.valinta.Valinta.*;
 
 class PelaajaTest {
@@ -13,6 +14,7 @@ class PelaajaTest {
 
     @BeforeEach
     void setUp() {
+        resetoiPelaajaNumero();
         pelaaja = new Pelaaja();
     }
 
@@ -76,15 +78,15 @@ class PelaajaTest {
 
     @Test
     void oikeaTulostusEriPelaajanumeroilla() {
-        pelaaja.resetoiPelaajaNumero();
-        assert (new Pelaaja().tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
+        assert (pelaaja.tulostaVoitot().toLowerCase().contains("pelaaja 1:llä"));
         assert (new Pelaaja().tulostaVoitot().toLowerCase().contains("pelaaja 2:lla"));
     }
 
     @Test
-    void pelaajiaMax2() {
-        for (int i = 0; i < 3; i++) {
-            Pelaaja pelaaja = new Pelaaja();
-        }
+    void pelaajaNumeroResetoituu() {
+        Pelaaja pelaaja2 = new Pelaaja();
+        Pelaaja pelaaja3 = new Pelaaja();
+        assertEquals(pelaaja2.toString().toLowerCase(), "pelaaja 2");
+        assertEquals(pelaaja3.toString().toLowerCase(), "pelaaja 1");
     }
 }

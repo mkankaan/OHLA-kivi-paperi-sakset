@@ -1,27 +1,24 @@
-package org.kivipaperisakset;
+package org.kivipaperisakset.peli;
 
+import org.kivipaperisakset.Pelaaja;
 import org.kivipaperisakset.utils.NumeroTekstina;
 import org.kivipaperisakset.valinta.Vertailija;
 import org.kivipaperisakset.valinta.Valinta;
+import static org.kivipaperisakset.Pelaaja.resetoiPelaajaNumero;
 
 public class Peli {
     private Pelaaja pelaaja1, pelaaja2;
     private int pelatutPelit, tasapelit, maxVoitot;
+    private final int OLETUS_MAX_VOITOT = 1;
 
-    public Peli(Pelaaja p1, Pelaaja p2, int maxVoitot) {
-        this.pelaaja1 = validoiPelaaja(p1);
-        this.pelaaja2 = validoiPelaaja(p2);
+    Peli() {
+        resetoiPelaajaNumero();
+        this.pelaaja1 = new Pelaaja();
+        this.pelaaja2 = new Pelaaja();
         vertaaPelaajia();
-        this.maxVoitot = validoiMaxVoitot(maxVoitot);
+        this.maxVoitot = OLETUS_MAX_VOITOT;
         this.pelatutPelit = 0;
         this.tasapelit = 0;
-    }
-
-    public int validoiMaxVoitot(int maxVoitot) {
-        if (maxVoitot < 1) {
-            throw new IllegalArgumentException("Voittojen maksimimäärän oltava vähintään 1");
-        }
-        return maxVoitot;
     }
 
     private Pelaaja validoiPelaaja(Pelaaja pelaaja) {
@@ -105,5 +102,34 @@ public class Peli {
         String viesti = sanakirja.getTekstina(maxVoitot).toUpperCase() + " VOITTO" + monikko + " - PELI PÄÄTTYY";
         System.out.println(viesti);
         return viesti;
+    }
+
+    public void setPelaaja1(Pelaaja pelaaja) {
+        this.pelaaja1 = validoiPelaaja(pelaaja);
+        vertaaPelaajia();
+    }
+
+    public void setPelaaja2(Pelaaja pelaaja) {
+        this.pelaaja2 = validoiPelaaja(pelaaja);
+        vertaaPelaajia();
+    }
+
+    public void setMaxVoitot(int maxVoitot) {
+        if (maxVoitot < 1) {
+            throw new IllegalArgumentException("Voittojen maksimimäärän oltava vähintään 1");
+        }
+        this.maxVoitot = maxVoitot;
+    }
+
+    public Pelaaja getPelaaja1() {
+        return pelaaja1;
+    }
+
+    public Pelaaja getPelaaja2() {
+        return pelaaja2;
+    }
+
+    public int getMaxVoitot() {
+        return maxVoitot;
     }
 }

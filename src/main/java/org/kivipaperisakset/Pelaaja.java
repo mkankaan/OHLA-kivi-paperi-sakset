@@ -50,7 +50,7 @@ public class Pelaaja {
         return "Pelaaja " + pelaajaNumero;
     }
 
-    public void resetoiPelaajaNumero() {
-        this.juoksevaNumero = 1;
+    public static void resetoiPelaajaNumero() {
+        juoksevaNumero = 1;
     }
 }
