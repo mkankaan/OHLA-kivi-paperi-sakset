@@ -28,7 +28,7 @@ public class Pelaaja {
 
     /**
      * Palauttaa pelaajalle kertyneet voitot kokonaislukuna.
-     * @return Pelaajan voitot kokonaislukuna.
+     * @return      Pelaajan voitot kokonaislukuna.
      */
     public int getVoitot() {
         return voitot;
@@ -43,7 +43,7 @@ public class Pelaaja {
 
     /**
      * Palauttaa satunnaisesti yhden Valinta-enumin arvoista.
-     * @return Satunnaisesti arvottu Valinta-enumin arvo.
+     * @return      Satunnaisesti arvottu Valinta-enumin arvo.
      */
     public Valinta valitse() {
         Valinta[] vaihtoehdot = Valinta.values();
@@ -52,7 +52,7 @@ public class Pelaaja {
 
     /**
      * Tulostaa ja palauttaa tiedon pelaajalle kertyneistä voitoista merkkijonona.
-     * @return Merkkijono, joka ilmaisee pelaajan voittojen määrän.
+     * @return      Merkkijono, joka ilmaisee pelaajan voittojen määrän.
      */
     public String tulostaVoitot() {
         String muoto = pelaajaNumero == 1 ? "ä" : "a";
@@ -71,7 +71,7 @@ public class Pelaaja {
 
     /**
      * Tulostaa pelaajanumeron muodossa "Pelaaja {pelaajanumero}"
-     * @return Merkkijono, joka ilmaisee pelaajan numeron
+     * @return      Merkkijono, joka ilmaisee pelaajan numeron.
      */
     public String toString() {
         return "Pelaaja " + pelaajaNumero;

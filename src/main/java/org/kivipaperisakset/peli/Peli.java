@@ -7,8 +7,8 @@ import org.kivipaperisakset.valinta.Valinta;
 import static org.kivipaperisakset.Pelaaja.resetoiPelaajaNumero;
 
 /**
- * Peli-luokka sisältää pelin toimintaan liittyvät metodit sekä
- * tulosten seurantaan ja esittämiseen.
+ * Peli-luokka sisältää pelin kulkuun sekä tulosten seurantaan ja
+ * esittämiseen liittyvät toiminnot.
  *
  * @author Ira Dook, Matleena Kankaanpää
  * @version 1.0 (2023-04-29)
@@ -28,7 +28,7 @@ public class Peli {
         this.pelaaja2 = new Pelaaja();
         vertaaPelaajia();
         this.maxVoitot = OLETUS_MAX_VOITOT;
-        this.pelatutPelit = 0;
+        this.pelatutKierrokset = 0;
         this.tasapelit = 0;
     }
 
