@@ -82,9 +82,9 @@ class PeliTest {
 
             if (peli.getTasapelit() > 0) {
                 tasapeli = true;
-                assert(pelaaja1.getVoitot() < peli.getPelatutPelit());
-                assert(pelaaja2.getVoitot() < peli.getPelatutPelit());
-                assertEquals((pelaaja1.getVoitot() + pelaaja2.getVoitot() + peli.getTasapelit()), peli.getPelatutPelit());
+                assert(pelaaja1.getVoitot() < peli.getPelatutKierrokset());
+                assert(pelaaja2.getVoitot() < peli.getPelatutKierrokset());
+                assertEquals((pelaaja1.getVoitot() + pelaaja2.getVoitot() + peli.getTasapelit()), peli.getPelatutKierrokset());
             }
         }
     }
@@ -99,7 +99,7 @@ class PeliTest {
 
         peli = peliBuilder.pelaaja1(pelaaja1).maxVoitot(5).luo();
         peli.pelaa();
-        assertEquals(peli.getPelatutPelit(), 0);
+        assertEquals(peli.getPelatutKierrokset(), 0);
     }
 
     @ParameterizedTest

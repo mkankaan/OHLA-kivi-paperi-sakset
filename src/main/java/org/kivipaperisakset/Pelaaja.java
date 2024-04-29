@@ -18,10 +18,10 @@ public class Pelaaja {
      * Konstruktori.
      */
     public Pelaaja() {
-        final int MAX_PELAAJIEN_LKM = 2;
+        final int PELAAJIEN_MAX_LKM = 2;
         this.pelaajaNumero = juoksevaNumero++;
 
-        if (juoksevaNumero > MAX_PELAAJIEN_LKM) {
+        if (juoksevaNumero > PELAAJIEN_MAX_LKM) {
             resetoiPelaajaNumero();
         }
     }
@@ -63,8 +63,7 @@ public class Pelaaja {
     }
 
     /**
-     * Resetoi pelaajanumerona toimivan juoksevan luokkamuuttujan
-     * takaisin arvoon 1.
+     * Resetoi pelaajanumerona toimivan juoksevan luokkamuuttujan alkuarvoon 1.
      */
     public static void resetoiPelaajaNumero() {
         juoksevaNumero = 1;
@@ -72,7 +71,7 @@ public class Pelaaja {
 
     /**
      * Tulostaa pelaajanumeron muodossa "Pelaaja {pelaajanumero}"
-     * @return Merkkijono, joka kertoo pelaajan numeron
+     * @return Merkkijono, joka ilmaisee pelaajan numeron
      */
     public String toString() {
         return "Pelaaja " + pelaajaNumero;
