@@ -8,15 +8,29 @@ import org.kivipaperisakset.peli.Peli;
 import org.kivipaperisakset.peli.PeliBuilder;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * PeliTest-luokka sisältää Peli-luokan testit.
+ *
+ *  @author Matleena Kankaanpää
+ *  @version 1.0 (2023-04-29)
+ */
+
 class PeliTest {
     private PeliBuilder peliBuilder = new PeliBuilder();
     private Peli peli;
 
+    /**
+     * Toiminnot, jotka suoritetaan ennen jokaista testiä.
+     * Peli resetoidaan alkutilaan.
+     */
     @BeforeEach
     void setUp() {
         peliBuilder.reset();
     }
 
+    /**
+     * Testaa pelin oletuskonstruktoria.
+     */
     @Test
     void oletusKonstruktori() {
         peli = peliBuilder.luo();
@@ -25,6 +39,9 @@ class PeliTest {
         assertEquals(peli.getMaxVoitot(), 1);
     }
 
+    /**
+     * Testaa, heitetäänkö odotettu poikkeus, jos pelaaja1:ksi yritetään asettaa null.
+     */
     @Test
     void pelaaja1Puuttuu() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -35,6 +52,9 @@ class PeliTest {
         assertTrue(exception.getMessage().toLowerCase().contains(expectedMessage.toLowerCase()));
     }
 
+    /**
+     * Testaa, heitetäänkö odotettu poikkeus, jos pelaaja2:ksi yritetään asettaa null.
+     */
     @Test
     void pelaaja2Puuttuu() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -45,6 +65,10 @@ class PeliTest {
         assertTrue(exception.getMessage().toLowerCase().contains(expectedMessage.toLowerCase()));
     }
 
+    /**
+     * Testaa, heitetäänkö odotettu poikkeus, jos voittojen maksimiarvoksi
+     * yritetään asettaa nolla tai negatiivinen luku.
+     */
     @ParameterizedTest
     @CsvSource({
             "-16", "-1", "0"
@@ -58,6 +82,10 @@ class PeliTest {
         assertTrue(exception.getMessage().toLowerCase().contains(expectedMessage.toLowerCase()));
     }
 
+    /**
+     * Testaa, heitetäänkö odotettu poikkeus, jos pelaaja1:ksi ja pelaaja2:ksi
+     * yritetään asettaa sama Pelaaja-olio.
+     */
     @Test
     void eiKahtaSamaaPelaajaa() {
         Pelaaja multitaskaaja = new Pelaaja();
@@ -70,8 +98,11 @@ class PeliTest {
         assertTrue(exception.getMessage().toLowerCase().contains(expectedMessage));
     }
 
+    /**
+     * Testaa, lasketaanko tasapelien määrä oikein kummallekin pelaajalle.
+     */
     @Test
-    void tasapeli() {
+    void tasapelitOikein() {
         boolean tasapeli = false;
 
         while (!tasapeli) {
@@ -89,6 +120,9 @@ class PeliTest {
         }
     }
 
+    /**
+     * Testaa, jatkuuko peli, jos maksimivoittojen määrä on ylitetty.
+     */
     @Test
     void eiYlitaMaksimivoittoja() {
         Pelaaja pelaaja1 = new Pelaaja();
@@ -102,6 +136,13 @@ class PeliTest {
         assertEquals(peli.getPelatutKierrokset(), 0);
     }
 
+    /**
+     * Testaa, tulostetaanko pelin tulokset oikeassa muodossa voittojen
+     * eri määrillä.
+     * @param maxVoitot     Voittojen määrä kullakin kierroksella kokonaislukuna.
+     * @param monikko       Tulostuksessa odotettava merkkijono "voitto"/"voittoa"
+     *                      riippuen siitä, loppuuko peli yhteen vai useampaan voittoon.
+     */
     @ParameterizedTest
     @CsvSource({
             "1, voitto", "2, voittoa", "11, voittoa"

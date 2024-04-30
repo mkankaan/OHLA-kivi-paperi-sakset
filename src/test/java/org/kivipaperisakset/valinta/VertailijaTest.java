@@ -5,6 +5,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.kivipaperisakset.valinta.Valinta.*;
 
+/**
+ * VertailijaTest-luokka sisältää Vertailija-luokan testit.
+ *
+ *  @author Matleena Kankaanpää
+ *  @version 1.0 (2023-04-29)
+ */
+
 class VertailijaTest {
     private Vertailija vertailija = new Vertailija();
 
