@@ -34,7 +34,7 @@ public class Peli {
 
     /**
      * Asettaa pelaaja 1:ksi parametrina annetun pelaajan.
-     * @param pelaaja Pelaaja 1:ksi asetettava Pelaaja-olio
+     * @param pelaaja       Pelaaja 1:ksi asetettava Pelaaja-olio
      */
     public void setPelaaja1(Pelaaja pelaaja) {
         this.pelaaja1 = validoiPelaaja(pelaaja);
@@ -43,7 +43,7 @@ public class Peli {
 
     /**
      * Asettaa pelaaja 2:ksi parametrina annetun pelaajan.
-     * @param pelaaja Pelaaja 2:ksi asetettava Pelaaja-olio
+     * @param pelaaja       Pelaaja 2:ksi asetettava Pelaaja-olio
      */
     public void setPelaaja2(Pelaaja pelaaja) {
         this.pelaaja2 = validoiPelaaja(pelaaja);
@@ -51,10 +51,10 @@ public class Peli {
     }
 
     /**
-     * Asettaa pelin voittojen maksimimäärän, joka toimii pelin lopetusehtona.
-     * Peli jatkuu, kunnes toinen pelaajista saavuttaa voittorajan.
-     * @param maxVoitot Kokonaisluku, joka asetetaan pelin voittojen maksimiarvoksi.
-     * @throws IllegalArgumentException Heittää poikkeuksen, jos annettu luku on nolla tai negatiivinen.
+     * Asettaa voittojen maksimimäärän, joka toimii pelin lopetusehtona.
+     * @param maxVoitot                 Voittojen maksimimäärä kokonaislukuna.
+     * @throws IllegalArgumentException Poikkeus, joka heitetään, jos annettu
+     *                                  luku on nolla tai negatiivinen.
      */
     public void setMaxVoitot(int maxVoitot) throws IllegalArgumentException {
         if (maxVoitot < 1) {
@@ -65,7 +65,7 @@ public class Peli {
 
     /**
      * Palauttaa pelaaja 1:n.
-     * @return Pelaaja-olio, joka on pelaaja 1:n paikalla.
+     * @return      Pelaaja-olio, joka on pelaaja 1:n paikalla.
      */
     public Pelaaja getPelaaja1() {
         return pelaaja1;
@@ -73,7 +73,7 @@ public class Peli {
 
     /**
      * Palauttaa pelaaja 2:n.
-     * @return Pelaaja-olio, joka on pelaaja 2:n paikalla
+     * @return      Pelaaja-olio, joka on pelaaja 2:n paikalla
      */
     public Pelaaja getPelaaja2() {
         return pelaaja2;
@@ -81,7 +81,7 @@ public class Peli {
 
     /**
      * Palauttaa voittosumman, johon asti peliä pelataan.
-     * @return Pelin voittojen maksimimäärä kokonaislukuna.
+     * @return      Pelin voittojen maksimimäärä kokonaislukuna.
      */
     public int getMaxVoitot() {
         return maxVoitot;
@@ -89,20 +89,27 @@ public class Peli {
 
     /**
      * Palauttaa pelin aikana sattuneiden tasapelien määrän.
-     * @return Tasapelien määrä kokonaislukuna.
+     * @return      Tasapelien määrä kokonaislukuna.
      */
     public int getTasapelit() {
         return tasapelit;
     }
 
     /**
-     * Palauttaa yhteensä pelattujen
-     * @return
+     * Palauttaa yhteensä pelattujen kierrosten lukumäärän.
+     * @return      Pelattujen kierrosten määrä kokonaislukuna.
      */
     public int getPelatutKierrokset() {
         return pelatutKierrokset;
     }
 
+    /**
+     * Käynnistää pelin. Peli jatkuu, kunnes toinen pelaajista saavuttaa
+     * asetetun voittojen maksimisumman. Tulostaa ja palauttaa lopuksi
+     * pelin tulokset merkkijonona.
+     * @return      Merkkijono, joka kertoo pelin päättyneen
+     *              ja ilmoittaa voittosumman, johon asti pelattiin.
+     */
     public String pelaa() {
         while (!peliLoppui()) {
             tulostaEra();

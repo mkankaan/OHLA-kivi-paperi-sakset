@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * NumeroTekstina-luokka sisältää singleton-tyyppisen sanakirjan,
  * josta voidaan hakea avain-arvo -pareina kokonaislukuja
- * numeerisessa ja kirjoitetussa muodossa.
+ * numeerisessa ja tekstimuodossa.
  *
  * @author Matleena Kankaanpää
  * @version 1.0 (2023-04-29)
@@ -35,22 +35,21 @@ public class NumeroTekstina {
 
     /**
      * Lisää sanakirjaan avain-arvo -parin. Jos sanakirjasta
-     * löytyy jo arvo samalla avaimella, entinen arvo ylikirjoitetaan.
-     * @param numero    Sanakirjaan lisättävä avain.
-     * @param teksti    Sanakirjaan lisättävän avaimen arvo.
+     * löytyy jo arvo samalla avaimella, olemassaoleva arvo ylikirjoitetaan.
+     * @param numero    Lisättävä avain kokonaislukuna.
+     * @param teksti    Lisättävä arvo merkkijonona.
      */
     public void lisaaNumero(int numero, String teksti) {
         sanakirja.put(numero, teksti);
     }
 
     /**
-     * Palauttaa sanakirjasta kokonaislukuavaimella löytyvän
-     * arvon merkkijonona, tai avaimen merkkijonona, jos
-     * avainta ei löydy sanakirjasta.
+     * Palauttaa sanakirjasta avaimella löytyvän arvon merkkijonona,
+     * tai avaimen merkkijonona, jos avainta ei löydy.
      * @param avain     Haettava avain kokonaislukuna.
-     * @return          Jos avain löytyi sanakirjasta, palautetaan
-     *                  sen arvona oleva teksti merkkijonona. Jos
-     *                  avainta ei löytynyt, palautetaan avain merkkijonona.
+     * @return          Jos avain löytyy sanakirjasta, palautetaan
+     *                  sen arvona oleva merkkijono. Jos avainta ei löydy,
+     *                  palautetaan avain merkkijonona.
      */
     public String getTekstina(int avain) {
         if (!sanakirja.containsKey(avain)) {
@@ -60,7 +59,7 @@ public class NumeroTekstina {
     }
 
     /**
-     * Palauttaa tiedon siitä, löytyykö tietty avain sanakirjasta.
+     * Palauttaa tiedon siitä, löytyykö annettu avain sanakirjasta.
      * @param arvo      Haettava avain kokonaislukuna.
      * @return          True jos avain löytyy, false jos ei löydy.
      */

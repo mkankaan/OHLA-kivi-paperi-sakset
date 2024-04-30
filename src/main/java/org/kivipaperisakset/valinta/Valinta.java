@@ -20,7 +20,7 @@ public enum Valinta {
     }
 
     /**
-     * Palauttaa siirron nimen.
+     * Palauttaa siirron nimen ("kivi"/"paperi"/"sakset").
      * @return      Siirron nimi merkkijonona.
      */
     @Override

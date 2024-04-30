@@ -4,8 +4,8 @@ import java.util.Comparator;
 import static org.kivipaperisakset.valinta.Valinta.*;
 
 /**
- *  Vertailija-luokkaa voidaan käyttää Valinta-enumin arvojen
- *  vertailuun määrittäessä kivi-paperi-sakset -pelin voittajaa.
+ *  Vertailija-luokkaa käytetään Valinta-enumin arvojen (kivi/paperi/sakset)
+ *  vertailuun määrittäessä pelin voittajaa.
  *  
  *  @author Matleena Kankaanpää
  *  @version 1.0 (2023-04-29)
@@ -17,7 +17,7 @@ public class Vertailija implements Comparator<Valinta> {
      * Vertaa kahta Valinta-enumin arvoa keskenään ja
      * palauttaa tulosta kuvaavan kokonaisluvun.
      * @param valinta1    Ensimmäinen vertailtava arvo.
-     * @param valinta2    Ensimmäinen vertailtava arvo.
+     * @param valinta2    Toinen vertailtava arvo.
      * @return            1 jos valinta1 voittaa valinta2:n,
      *                    -1 jos valinta1 häviää valinta2:lle,
      *                    0 jos arvot ovat samat.
